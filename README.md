@@ -2,11 +2,29 @@
 
 ## Overview
 
-Enterprise ESG Emissions Management Platform is a full-stack prototype designed to simulate sustainability data ingestion and review workflows used in modern ESG reporting systems.
+Enterprise ESG Emissions Management Platform is a full-stack ESG data management prototype designed to simulate enterprise sustainability reporting workflows.
 
-The platform enables ingestion of emissions-related datasets from multiple enterprise-style sources, performs normalization and CO2e calculations, identifies suspicious records, and provides analyst review workflows with audit logging support.
+The platform enables ingestion of emissions-related datasets from multiple enterprise-style sources, performs normalization and CO2e calculations, identifies suspicious records, and supports analyst review workflows with audit logging capabilities.
 
-This project was built to demonstrate backend system design, data processing workflows, REST API development, and full-stack integration using Django and React.
+The project demonstrates:
+- Full-stack application development
+- REST API design using Django REST Framework
+- Data ingestion and processing workflows
+- Frontend-backend integration
+- Deployment of production-ready web applications
+
+---
+
+## Live Deployment
+
+### Frontend
+https://enterprise-esg-platform.vercel.app
+
+### Backend
+https://enterprise-esg-platform-production.up.railway.app
+
+### Admin Panel
+https://enterprise-esg-platform-production.up.railway.app/admin
 
 ---
 
@@ -14,13 +32,14 @@ This project was built to demonstrate backend system design, data processing wor
 
 ### Data Ingestion
 - SAP-style CSV upload support
-- Utility consumption CSV ingestion
+- Utility emissions data ingestion
 - Mock travel emissions synchronization
+- Multi-source emissions handling
 
 ### Emissions Processing
 - Record normalization
 - CO2e calculation workflows
-- Scope-aware emissions handling
+- Scope-aware emissions processing
 - Suspicious record detection
 
 ### Review & Audit Workflows
@@ -29,7 +48,7 @@ This project was built to demonstrate backend system design, data processing wor
 - Admin monitoring dashboard
 
 ### Frontend Dashboard
-- Interactive React-based dashboard
+- React-based interactive dashboard
 - Upload management interface
 - Emissions records table
 - Suspicious record highlighting
@@ -45,18 +64,23 @@ This project was built to demonstrate backend system design, data processing wor
 ### Frontend
 - React
 - Axios
+- Vite
 
 ### Database
 - SQLite
+
+### Deployment
+- Railway (Backend)
+- Vercel (Frontend)
 
 ---
 
 ## System Architecture
 
 ### Backend
-The backend exposes REST APIs for ingestion, review workflows, and emissions record management.
+The backend exposes REST APIs for ingestion, emissions processing, and analyst review workflows.
 
-Key responsibilities:
+Core responsibilities:
 - CSV parsing and ingestion
 - Emissions normalization
 - CO2e calculations
@@ -64,7 +88,7 @@ Key responsibilities:
 - Review workflow handling
 
 ### Frontend
-The frontend provides a lightweight analyst dashboard for:
+The frontend provides an analyst-facing dashboard for:
 - Uploading source files
 - Viewing emissions records
 - Reviewing suspicious entries
@@ -75,7 +99,7 @@ The frontend provides a lightweight analyst dashboard for:
 ## Supported Data Sources
 
 ### SAP-style Procurement Data
-Simulated fuel procurement datasets.
+Simulated procurement and fuel consumption datasets.
 
 Example fields:
 - activity
@@ -83,7 +107,7 @@ Example fields:
 - unit
 
 ### Utility Consumption Data
-Electricity consumption records.
+Electricity usage records.
 
 Example fields:
 - meter_id
@@ -150,6 +174,7 @@ http://localhost:5173
 - Analyst review lifecycle
 - Audit traceability
 - Admin-level monitoring
+- Full-stack deployment workflow
 
 ---
 
@@ -172,13 +197,13 @@ breathe-esg/
 ## Screenshots
 
 ### Dashboard
-(Add dashboard screenshot)
+![Dashboard](screenshots/dashboard1.png)
 
-### Suspicious Records
-(Add suspicious records screenshot)
+### Emissions Records
+![Records](screenshots/dashboard2.png)
 
 ### Admin Panel
-(Add admin panel screenshot)
+![Admin](screenshots/admin_panel.png)
 
 ---
 
@@ -194,9 +219,11 @@ breathe-esg/
 
 ---
 
-## Disclaimer
+## Login details for admin page
 
-This project is a prototype implementation intended for demonstration and educational purposes.  
-External enterprise integrations such as SAP and travel APIs are simulated using mock workflows and sample datasets.
+Username-admin1
+email-admin1@gmail.com
+password-12345
 
-```
+---
+
