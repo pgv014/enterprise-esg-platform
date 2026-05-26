@@ -2,21 +2,21 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import './App.css'
 
+const API_BASE = 'https://enterprise-esg-platform-production.up.railway.app'
+
 function App() {
 
   const [records, setRecords] = useState([])
-
   const [sapFile, setSapFile] = useState(null)
-
   const [utilityFile, setUtilityFile] = useState(null)
-
+  const [loading, setLoading] = useState(false)
 
   const fetchRecords = async () => {
 
     try {
 
       const res = await axios.get(
-        'http://127.0.0.1:8000/api/records/'
+        `${API_BASE}/api/records/`
       )
 
       setRecords(res.data)
@@ -24,9 +24,9 @@ function App() {
     } catch (error) {
 
       console.error(error)
+      alert('Failed to fetch records')
     }
   }
-
 
   useEffect(() => {
 
@@ -37,7 +37,10 @@ function App() {
 
   const uploadSAP = async () => {
 
-    if (!sapFile) return
+    if (!sapFile) {
+      alert('Please select a SAP CSV file')
+      return
+    }
 
     const formData = new FormData()
 
@@ -45,23 +48,35 @@ function App() {
 
     try {
 
+      setLoading(true)
+
       await axios.post(
-        'http://127.0.0.1:8000/api/upload/sap/',
+        `${API_BASE}/api/upload/sap/`,
         formData
       )
+
+      alert('SAP file uploaded successfully')
 
       fetchRecords()
 
     } catch (error) {
 
       console.error(error)
+      alert('SAP upload failed')
+
+    } finally {
+
+      setLoading(false)
     }
   }
 
 
   const uploadUtility = async () => {
 
-    if (!utilityFile) return
+    if (!utilityFile) {
+      alert('Please select a Utility CSV file')
+      return
+    }
 
     const formData = new FormData()
 
@@ -69,16 +84,25 @@ function App() {
 
     try {
 
+      setLoading(true)
+
       await axios.post(
-        'http://127.0.0.1:8000/api/upload/utility/',
+        `${API_BASE}/api/upload/utility/`,
         formData
       )
+
+      alert('Utility file uploaded successfully')
 
       fetchRecords()
 
     } catch (error) {
 
       console.error(error)
+      alert('Utility upload failed')
+
+    } finally {
+
+      setLoading(false)
     }
   }
 
@@ -87,15 +111,24 @@ function App() {
 
     try {
 
+      setLoading(true)
+
       await axios.post(
-        'http://127.0.0.1:8000/api/sync/travel/'
+        `${API_BASE}/api/sync/travel/`
       )
+
+      alert('Travel data synced')
 
       fetchRecords()
 
     } catch (error) {
 
       console.error(error)
+      alert('Travel sync failed')
+
+    } finally {
+
+      setLoading(false)
     }
   }
 
@@ -105,7 +138,7 @@ function App() {
     try {
 
       await axios.post(
-        `http://127.0.0.1:8000/api/approve/${id}/`
+        `${API_BASE}/api/approve/${id}/`
       )
 
       fetchRecords()
@@ -113,6 +146,7 @@ function App() {
     } catch (error) {
 
       console.error(error)
+      alert('Approve failed')
     }
   }
 
@@ -122,7 +156,7 @@ function App() {
     try {
 
       await axios.post(
-        `http://127.0.0.1:8000/api/reject/${id}/`
+        `${API_BASE}/api/reject/${id}/`
       )
 
       fetchRecords()
@@ -130,6 +164,7 @@ function App() {
     } catch (error) {
 
       console.error(error)
+      alert('Reject failed')
     }
   }
 
@@ -177,8 +212,11 @@ function App() {
           onChange={(e) => setSapFile(e.target.files[0])}
         />
 
-        <button onClick={uploadSAP}>
-          Upload SAP
+        <button
+          onClick={uploadSAP}
+          disabled={loading}
+        >
+          {loading ? 'Uploading...' : 'Upload SAP'}
         </button>
 
       </div>
@@ -193,8 +231,11 @@ function App() {
           onChange={(e) => setUtilityFile(e.target.files[0])}
         />
 
-        <button onClick={uploadUtility}>
-          Upload Utility
+        <button
+          onClick={uploadUtility}
+          disabled={loading}
+        >
+          {loading ? 'Uploading...' : 'Upload Utility'}
         </button>
 
       </div>
@@ -204,8 +245,11 @@ function App() {
 
         <h2>Travel Data</h2>
 
-        <button onClick={syncTravel}>
-          Sync Travel Data
+        <button
+          onClick={syncTravel}
+          disabled={loading}
+        >
+          {loading ? 'Syncing...' : 'Sync Travel Data'}
         </button>
 
       </div>
