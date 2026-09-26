@@ -11,7 +11,7 @@ The project demonstrates:
 - REST API design using Django REST Framework
 - Data ingestion and processing workflows
 - Frontend-backend integration
-- Deployment of production-ready web applications.
+- Deployment of production-ready web applications
 
 ---
 
