@@ -34,7 +34,7 @@ https://enterprise-esg-platform-production.up.railway.app/admin
 - SAP-style CSV upload support
 - Utility emissions data ingestion
 - Mock travel emissions synchronization
-- Multi-source emissions handling
+- Multi-source emissions handling.
 
 ### Emissions Processing
 - Record normalization
